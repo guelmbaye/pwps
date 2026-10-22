@@ -5,11 +5,10 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/guelmbaye/seqseal.git",
-    "directory": "packages/pwps"
+    "url": "git+https://github.com/guelmbaye/pwps.git"
   },
-  "homepage": "https://github.com/guelmbaye/seqseal/tree/main/packages/pwps#readme",
-  "bugs": "https://github.com/guelmbaye/seqseal/issues",
+  "homepage": "https://github.com/guelmbaye/pwps#readme",
+  "bugs": "https://github.com/guelmbaye/pwps/issues",
   "type": "module",
   "keywords": [
     "pwps",
@@ -19,8 +18,16 @@
     "specification",
     "sop"
   ],
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
     "./schema": "./schema/pwps-0.1.schema.json"
   },
   "bin": {
@@ -38,26 +45,24 @@
     "CHANGELOG.md"
   ],
   "publishConfig": {
-    "access": "public",
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.js"
-      },
-      "./schema": "./schema/pwps-0.1.schema.json"
-    }
+    "access": "public"
   },
   "scripts": {
     "build": "tsup",
-    "pwps": "tsx src/cli.ts"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "pwps": "tsx src/cli.ts",
+    "check": "npm run typecheck && npm test && npm run build && node bin/pwps.mjs validate examples/inbound-delivery.yaml"
   },
   "dependencies": {
     "ajv": "^8.20.0",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
-    "tsup": "^8.5.0"
+    "@types/node": "^22.10.0",
+    "tsup": "^8.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "5.9.3",
+    "vitest": "^3.2.4"
   }
 }

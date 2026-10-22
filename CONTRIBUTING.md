@@ -24,9 +24,10 @@ they belong to source bindings or consumer policies, not to the protocol.
 ## Development
 
 ```bash
-pnpm install
-pnpm vitest run packages/pwps
-pnpm pwps validate examples/inbound-delivery.yaml
+npm install
+npm test                                            # unit and conformance tests
+npm run pwps -- validate examples/inbound-delivery.yaml
+npm run check                                       # everything CI runs
 ```
 
 Rules:
@@ -42,4 +43,4 @@ Rules:
 
 ## Governance
 
-PWPS is currently maintained by the SEQSEAL project team. It is not (yet) an industry standard and does not claim to be.
+PWPS is currently maintained by the SEQSEAL project ([github.com/guelmbaye/seqseal](https://github.com/guelmbaye/seqseal)). It is not (yet) an industry standard and does not claim to be.

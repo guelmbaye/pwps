@@ -29,13 +29,14 @@ AI prompts or business actions such as "hold the shipment" — those belong to t
 
 ## Quick start
 
-PWPS is not published to npm yet. From the root of this repository:
+PWPS is not published to npm yet. From a clone of this repository (Node.js 20 or later):
 
 ```bash
-pnpm install
-pnpm pwps validate packages/pwps/examples/inbound-delivery.yaml
-pnpm pwps hash packages/pwps/examples/inbound-delivery.yaml
-pnpm pwps eval packages/pwps/examples/inbound-delivery.yaml packages/pwps/examples/timeline-wrong-order.json
+npm install
+npm run build
+npx pwps validate examples/inbound-delivery.yaml
+npx pwps hash examples/inbound-delivery.yaml
+npx pwps eval examples/inbound-delivery.yaml examples/timeline-wrong-order.json
 ```
 
 ```
@@ -45,6 +46,8 @@ States: 5
 Constraints: 11
 Hash: sha256:6f0ad940…
 ```
+
+`npm run check` runs what CI runs: type check, tests (unit and conformance), build, and a CLI validation.
 
 ## Library
 
@@ -111,10 +114,16 @@ states, zones, ordering, timing, evidence requirements and uncertainty, with det
 
 ## Reference implementation
 
-[SEQSEAL](../../README.md) is the first consumer: it evaluates IDP-01 against Ring-derived evidence and maps the
+[SEQSEAL](https://github.com/guelmbaye/seqseal) is the first consumer: it evaluates IDP-01 against Ring-derived evidence and maps the
 result to an operational action through its own, separate action policy. PWPS itself has no dependency on Ring, AWS or SEQSEAL.
 
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). New core operators require normative semantics, schema changes, valid and invalid
 fixtures, an evaluation example and a compatibility analysis.
+
+## History
+
+PWPS was written as part of [SEQSEAL](https://github.com/guelmbaye/seqseal) (`packages/pwps`) and extracted here with
+`git subtree split`, so the first commits keep their SEQSEAL messages. SEQSEAL evaluates its receiving protocol, IDP-01, with
+this code.

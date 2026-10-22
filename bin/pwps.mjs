@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 
 const dist = join(dirname(fileURLToPath(import.meta.url)), "..", "dist", "cli.js");
 if (!existsSync(dist)) {
-  console.error("pwps: not built yet. Run `pnpm --filter @pwps/core build` (or `pnpm pwps …` from the monorepo root).");
+  console.error("pwps: not built yet. Run `npm run build` first (or `npm run pwps -- <command>` to run from source).");
   process.exit(2);
 }
 await import(dist);
